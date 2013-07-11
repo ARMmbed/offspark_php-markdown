@@ -796,7 +796,13 @@ class Markdown_Parser {
 
 		$url = $this->encodeAttribute($url);
 
-		$result = "<a href=\"$url\"";
+		$result = "<a";
+        if (substr($url, 0, 1) === "!")
+        {
+            $result .= " rel=\"nofollow\"";
+            $url = substr($url, 1);
+        }
+        $result .= " href=\"$url\"";
 		if (isset($title)) {
 			$title = $this->encodeAttribute($title);
 			$result .=  " title=\"$title\"";
