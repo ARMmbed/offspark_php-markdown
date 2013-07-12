@@ -796,13 +796,7 @@ class Markdown_Parser {
 
 		$url = $this->encodeAttribute($url);
 
-		$result = "<a";
-        if (substr($url, 0, 1) === "!")
-        {
-            $result .= " rel=\"nofollow\"";
-            $url = substr($url, 1);
-        }
-        $result .= " href=\"$url\"";
+        $result = "<a href=\"$url\"";
 		if (isset($title)) {
 			$title = $this->encodeAttribute($title);
 			$result .=  " title=\"$title\"";
@@ -2474,10 +2468,16 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 		$title			=& $matches[7];
 		$attr  = $this->doExtraAttributes("a", $dummy =& $matches[8]);
 
+		$result = "<a";
+        if (substr($url, 0, 1) === "!")
+        {
+            $result .= " rel=\"nofollow\"";
+            $url = substr($url, 1);
+        }
 
 		$url = $this->encodeAttribute($url);
 
-		$result = "<a href=\"$url\"";
+		$result .= " href=\"$url\"";
 		if (isset($title)) {
 			$title = $this->encodeAttribute($title);
 			$result .=  " title=\"$title\"";
