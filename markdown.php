@@ -2474,6 +2474,12 @@ class MarkdownExtra_Parser extends Markdown_Parser {
             $result .= " rel=\"nofollow\"";
             $url = substr($url, 1);
         }
+        
+        // Ignore anything not http(s) or starting with /
+        //
+        if (substr($url, 0, 1) !== '/' &&
+            strncasecmp($url, 'http', 4) !== 0)
+            return;
 
 		$url = $this->encodeAttribute($url);
 
